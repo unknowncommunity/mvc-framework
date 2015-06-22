@@ -1,6 +1,4 @@
-package ua.controller.ua.framework.model.meta;
-
-import java.lang.reflect.Parameter;
+package ua.uc.framework.model.meta;
 
 /**
  * @author Tradunsky V.V.

@@ -1,7 +1,7 @@
-package ua.controller.ua.framework;
+package ua.uc.framework;
 
-import ua.controller.ua.framework.model.meta.ParamMeta;
-import ua.controller.ua.framework.model.meta.URLMeta;
+import ua.uc.framework.model.meta.ParamMeta;
+import ua.uc.framework.model.meta.URLMeta;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -17,11 +17,10 @@ import static java.util.stream.Collectors.toList;
 public class URLReader {
     public List<URLMeta> processClassURL(Class clazz) {
         Method[] methods = clazz.getDeclaredMethods();
-        List<URLMeta> urlMeta = Arrays.stream(methods)
-                .filter((m) -> Modifier.isPublic(m.getModifiers()))
+        return Arrays.stream(methods)
+                .filter(m -> Modifier.isPublic(m.getModifiers()))
                 .map(URLReader::mapMethodToURLMeta)
                 .collect(toList());
-        return urlMeta;
     }
 
     private static URLMeta mapMethodToURLMeta(Method method){

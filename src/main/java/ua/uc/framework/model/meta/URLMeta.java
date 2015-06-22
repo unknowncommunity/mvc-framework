@@ -1,4 +1,4 @@
-package ua.controller.ua.framework.model.meta;
+package ua.uc.framework.model.meta;
 
 import java.util.Arrays;
 

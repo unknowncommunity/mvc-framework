@@ -1,4 +1,4 @@
-package ua.controller;
+package ua.uc.controller;
 
 import java.net.URL;
 
