@@ -1,6 +1,8 @@
 package ua.uc.framework.servlets;
 
 import ua.uc.framework.context.BasicContext;
+import ua.uc.framework.model.RequestMethod;
+import ua.uc.framework.processors.request.RequestProcessor;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -22,12 +24,19 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        String uri = excludeContextPathFromUri(req.getRequestURI(), req.getContextPath());
+        RequestMethod requestMethod = RequestMethod.valueOf(req.getMethod());
+        RequestProcessor requestProcessor = context.getRequestProcessor(uri, requestMethod);
+        requestProcessor.process(req, resp);
     }
 
     @Override
     public void init() throws ServletException {
         super.init();
+    }
+
+    private String excludeContextPathFromUri(String uri, String contextPath) {
+        return uri.substring(contextPath.length() + 1);
     }
 
     @Override

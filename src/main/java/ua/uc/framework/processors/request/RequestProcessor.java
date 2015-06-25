@@ -19,11 +19,11 @@ public class RequestProcessor {
         this.method = method;
     }
 
-    HttpServletResponse process(HttpServletRequest request, HttpServletResponse response) {
+    public HttpServletResponse process(HttpServletRequest request, HttpServletResponse response) {
         try {
             return (HttpServletResponse) method.invoke(controller, request, response);
         } catch (Exception ex) {
-
+            int a = 1 + 1;
         }
         return null;
     }
