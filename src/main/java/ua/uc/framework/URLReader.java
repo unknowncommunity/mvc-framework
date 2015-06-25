@@ -1,5 +1,7 @@
 package ua.uc.framework;
 
+import ua.uc.framework.mappers.Mapper;
+import ua.uc.framework.mappers.URLMetaMapper;
 import ua.uc.framework.model.meta.ParamMeta;
 import ua.uc.framework.model.meta.URLMeta;
 
@@ -15,25 +17,18 @@ import static java.util.stream.Collectors.toList;
  * @author Tradunsky V.V.
  */
 public class URLReader {
+    private Mapper<Method, URLMeta> urlMetaMapper;
+
+    public URLReader() {
+        urlMetaMapper = new URLMetaMapper();
+    }
+
+
     public List<URLMeta> processClassURL(Class clazz) {
         Method[] methods = clazz.getDeclaredMethods();
         return Arrays.stream(methods)
                 .filter(m -> Modifier.isPublic(m.getModifiers()))
-                .map(URLReader::mapMethodToURLMeta)
+                .map(urlMetaMapper::map)
                 .collect(toList());
-    }
-
-    private static URLMeta mapMethodToURLMeta(Method method){
-        return new URLMeta(method.getName(), mapToParamMeta(method), method.getReturnType());
-    }
-
-    private static ParamMeta[] mapToParamMeta(Method method) {
-        Parameter[] parameters = method.getParameters();
-        Class[] parametersTypes = method.getParameterTypes();
-        ParamMeta[] paramsMetas = new ParamMeta[parametersTypes.length];
-        for (int i = 0; i < parameters.length; i++) {
-            paramsMetas[i] = new ParamMeta(parameters[i].getName(), parameters[i].getType());
-        }
-        return paramsMetas;
     }
 }

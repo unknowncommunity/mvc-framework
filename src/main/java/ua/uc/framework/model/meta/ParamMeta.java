@@ -4,10 +4,8 @@ package ua.uc.framework.model.meta;
  * @author Tradunsky V.V.
  */
 public class ParamMeta {
-    private String paramName;
-    private Class paramType;
-
-    public ParamMeta(){}
+    private final String paramName;
+    private final Class paramType;
 
     public ParamMeta(String paramName, Class paramType) {
         this.paramName = paramName;
@@ -18,16 +16,8 @@ public class ParamMeta {
         return paramName;
     }
 
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
-    }
-
     public Class getParamType() {
         return paramType;
-    }
-
-    public void setParamType(Class paramType) {
-        this.paramType = paramType;
     }
 
     @Override
