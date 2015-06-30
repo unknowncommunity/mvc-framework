@@ -10,15 +10,10 @@ import java.lang.reflect.Method;
  * Created by kostya on 23.06.15.
  */
 public class URLMetaMapper implements Mapper<Method, URLMeta> {
-    private Mapper<Method, ParamMeta[]> paramMetaMapper;
-
-
-    public URLMetaMapper() {
-        paramMetaMapper = new ParamMetaMapper();
-    }
+    public URLMetaMapper() {}
 
     @Override
     public URLMeta map(Method method) {
-        return new URLMeta(method.getName(), paramMetaMapper.map(method), method.getReturnType(), RequestMethod.GET);
+        return new URLMeta(method.getName(),  method.getReturnType(), RequestMethod.GET);
     }
 }
