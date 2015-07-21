@@ -19,8 +19,8 @@ public class MethodMetaMapper implements Mapper<Method, MethodMeta> {
     public MethodMeta map(Method method) {
         Parameter[] parameters = method.getParameters();
         List<ParamMeta> paramsMetas = new ArrayList<>();
-        ParamMeta requestMeta = getSpecificParamMeta(parameters, HttpServletRequest.class);
-        ParamMeta responseMeta = getSpecificParamMeta(parameters, HttpServletResponse.class);
+        ParamMeta requestMeta = null;
+        ParamMeta responseMeta = null;
 
         for (int position = 0; position < parameters.length; position++) {
             Parameter parameter = parameters[position];
@@ -38,17 +38,6 @@ public class MethodMetaMapper implements Mapper<Method, MethodMeta> {
         }
 
         return new MethodMeta(requestMeta, responseMeta, paramsMetas.toArray(new ParamMeta[paramsMetas.size()]));
-    }
-
-    private ParamMeta getSpecificParamMeta(Parameter[] parameters, Class specificType) {
-        for (int position = 0; position < parameters.length; position++) {
-            Parameter parameter = parameters[position];
-
-            if (parameter.getType().isAssignableFrom(specificType)) {
-                return toParamMeta(parameter, position);
-            }
-        }
-        return null;
     }
 
     private ParamMeta toParamMeta(Parameter parameter, int position) {
