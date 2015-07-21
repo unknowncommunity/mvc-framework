@@ -6,10 +6,12 @@ package ua.uc.framework.model.meta;
 public class ParamMeta {
     private final String paramName;
     private final Class paramType;
+    private final int position;
 
-    public ParamMeta(String paramName, Class paramType) {
+    public ParamMeta(String paramName, Class paramType, int position) {
         this.paramName = paramName;
         this.paramType = paramType;
+        this.position = position;
     }
 
     public String getParamName() {
@@ -20,6 +22,10 @@ public class ParamMeta {
         return paramType;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,16 +33,17 @@ public class ParamMeta {
 
         ParamMeta paramMeta = (ParamMeta) o;
 
+        if (position != paramMeta.position) return false;
         if (paramName != null ? !paramName.equals(paramMeta.paramName) : paramMeta.paramName != null) return false;
-        if (paramType != null ? !paramType.equals(paramMeta.paramType) : paramMeta.paramType != null) return false;
+        return !(paramType != null ? !paramType.equals(paramMeta.paramType) : paramMeta.paramType != null);
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = paramName != null ? paramName.hashCode() : 0;
         result = 31 * result + (paramType != null ? paramType.hashCode() : 0);
+        result = 31 * result + position;
         return result;
     }
 
@@ -45,6 +52,7 @@ public class ParamMeta {
         return "ParamMeta{" +
                 "paramName='" + paramName + '\'' +
                 ", paramType=" + paramType +
+                ", position=" + position +
                 '}';
     }
 }

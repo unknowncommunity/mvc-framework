@@ -28,7 +28,7 @@ public class BasicContext {
             try {
                 controller = Class.forName(controllerClass);
             } catch (Exception e) {
-
+                continue;
             }
             classProcessor.process(controller);
         }

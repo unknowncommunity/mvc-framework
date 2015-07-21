@@ -9,15 +9,15 @@ import java.lang.reflect.Method;
  */
 public class RequestProcessorMapper implements Mapper<Method, RequestProcessor> {
     private final Object controller;
-    private ParamMetaMapper paramMetaMapper;
+    private MethodMetaMapper methodMetaMapper;
 
     public RequestProcessorMapper(Object controller) {
-        paramMetaMapper = new ParamMetaMapper();
+        methodMetaMapper = new MethodMetaMapper();
         this.controller = controller;
     }
 
     @Override
     public RequestProcessor map(Method method) {
-        return new RequestProcessor(controller, method, paramMetaMapper.map(method));
+        return new RequestProcessor(controller, method, methodMetaMapper.map(method));
     }
 }

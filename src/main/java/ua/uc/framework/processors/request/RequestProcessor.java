@@ -1,6 +1,7 @@
 package ua.uc.framework.processors.request;
 
 import ua.uc.framework.mappers.MethodParamsMapper;
+import ua.uc.framework.model.meta.MethodMeta;
 import ua.uc.framework.model.meta.ParamMeta;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,18 +14,13 @@ import java.lang.reflect.Method;
 public class RequestProcessor {
     private Object controller;
     private Method method;
-    private ParamMeta[] paramMeta;
+    private MethodMeta methodMeta;
     private MethodParamsMapper methodParamsMapper;
 
-    public RequestProcessor() {
-        methodParamsMapper = new MethodParamsMapper();
-    }
-
-    public RequestProcessor(Object controller, Method method, ParamMeta[] paramMeta) {
-        this();
+    public RequestProcessor(Object controller, Method method, MethodMeta methodMeta) {
         this.controller = controller;
         this.method = method;
-        this.paramMeta = paramMeta;
+        this.methodParamsMapper = new MethodParamsMapper(methodMeta);
     }
 
     public HttpServletResponse process(HttpServletRequest request, HttpServletResponse response) {

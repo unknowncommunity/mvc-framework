@@ -14,7 +14,8 @@ public class ParamMetaMapper implements Mapper<Method, ParamMeta[]> {
         Parameter[] parameters = method.getParameters();
         ParamMeta[] paramsMetas = new ParamMeta[parameters.length];
         for (int i = 0; i < parameters.length; i++) {
-            paramsMetas[i] = new ParamMeta(parameters[i].getName(), parameters[i].getType());
+            int position = i;
+            paramsMetas[i] = new ParamMeta(parameters[i].getName(), parameters[i].getType(), position);
         }
         return paramsMetas;
     }

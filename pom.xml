@@ -6,7 +6,7 @@
 
     <groupId>ua.uk.framework</groupId>
     <artifactId>mvc</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1_custom_param</version>
     <packaging>jar</packaging>
 
     <properties>
